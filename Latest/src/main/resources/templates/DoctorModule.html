@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            margin: 0; /* Remove default margin */
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .button.back {
+            background-color: #f44336;
+        }
+        .button.back:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Doctor Module</h2>
+
+    <a th:href="@{/doctor/Register}" class="button">New Registration</a>
+
+    <a th:href="@{/doctor/ManageViewAppointment}" class="button">Manage/View Appointment</a>
+
+    <a th:href="@{/doctor/GetPatientDetails}" class="button">Patient History</a>
+
+    <a th:href="@{/doctor/PatientVitals}" class="button">Update Patient Vital</a>
+
+    <!-- Back Button -->
+    <a th:href="@{/Home/welcome}" class="button back">Home</a>
+
+</div>
+</body>
+</html>

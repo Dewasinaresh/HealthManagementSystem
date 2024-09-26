@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+    <style>
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .message-box {
+            border: 2px solid gray;
+            border-radius: 10px;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .home-button:hover {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="message-box" th:text="${massage}">
+
+    </div>
+    <a th:href="@{/home/welcome}" class="home-button">Home</a>
+</div>
+</body>
+</html>

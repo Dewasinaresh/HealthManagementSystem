@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage and View Appointment</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px;
+        }
+
+        .form-container button {
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .table-container {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .update-btn {
+            background-color: #f56c6c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background-color: #d44a4a;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+        }
+      button.back {
+        background-color: #f44336; /* Change back button color */
+    }
+
+    button.back:hover {
+        background-color: #d32f2f; /* Darken hover effect for back button */
+    }
+        }
+    </style>
+</head>
+<body>
+<h2>View Appointment</h2>
+
+<!-- Search Form -->
+<div class="search-container">
+    <form th:action="@{/doctor/appointmentsSearch}" method="post" class="form-container">
+        <label for="doctorId">Doctor Id:</label>
+        <input type="number" id="doctorId" name="doctorId" placeholder="Enter Doctor Id" />
+
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate" name="fromDate" />
+
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate" name="toDate" />
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<!-- Appointment Table -->
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Patient Id</th>
+            <th>Patient Name</th>
+            <th>Appointment Date</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the list of appointments -->
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.patientId}"></td>
+            <td th:text="${appointment.patientName}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.status}"></td>
+        </tr>
+        <!-- If there are no appointments -->
+        <tr th:if="${#lists.isEmpty(appointments)}">
+            <td colspan="5">No Appointments Found</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<button type="button" class="back" onclick="window.location.href='/doctor/DashBoard'">Back</button>
+</body>
+</html>

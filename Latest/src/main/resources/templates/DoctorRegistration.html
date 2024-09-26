@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Doctor Registration</title>
+  <style>
+    body {
+        font-family: sans-serif;
+        background-color: #f2f2f2; /* Add some background color */
+    }
+
+    .container {
+        border: 1px solid black;
+        width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff; /* Add background color to the form */
+        border-radius: 10px; /* Add some border radius for smooth corners */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a light shadow */
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px; /* Add border radius to inputs */
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px; /* Add border radius to buttons */
+        font-size: 16px; /* Increase button font size */
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    .button-group {
+        text-align: center;
+    }
+
+    button.back {
+        background-color: #f44336; /* Change back button color */
+    }
+
+    button.back:hover {
+        background-color: #d32f2f; /* Darken hover effect for back button */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Doctor Registration</h2>
+  <form th:action="@{/doctor/saveDoctor}" method="post">
+
+    <label for="doctorName">Doctor Name:</label>
+    <input type="text" id="doctorName" name="doctorName" required>
+
+    <label for="typeOfDoctor">Doctor Type:</label>
+    <select id="typeOfDoctor" name="typeOfDoctor" required>
+      <option value="Physician">Physician</option>
+      <option value="Surgeon">Surgeon</option>
+    </select>
+
+    <label for="doctorSpecification">Speciality:</label>
+    <input type="text" id="doctorSpecification" name="doctorSpecification" required>
+
+    <div class="button-group">
+      <button type="submit">Save</button>
+      <button type="button" class="back" onclick="window.location.href='/doctor/DashBoard'">Back</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

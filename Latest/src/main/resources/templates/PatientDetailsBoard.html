@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Medical History</title>
+  <style>
+    /* Basic styling for the layout */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .form-container input {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 150px;
+    }
+
+    .form-container button {
+        padding: 8px 16px;
+        margin: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .form-container button:hover {
+        background-color: #45a049;
+    }
+
+    .table-container {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+<h2>Patient Medical History</h2>
+
+<!-- Search Form -->
+<div class="search-container">
+  <form th:action="@{/doctor/GetPatientDetails}" method="get" class="form-container">
+    <label for="patientId">Patient Id:</label>
+    <input type="text" id="patientId" name="patientId" placeholder="Enter Patient Id" />
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<!-- Medical History Table -->
+<div class="table-container">
+  <table>
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Disease Name</th>
+      <th>Recover</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of medical history records -->
+    <tr th:each="history : ${medicalHistory}">
+      <td th:text="${history.date}">2024-09-15</td>
+      <td th:text="${history.diseaseName}">Flu</td>
+      <td th:text="${history.recoverStatus}">Yes</td>
+    </tr>
+    <!-- If no records are found -->
+    <tr th:if="${#lists.isEmpty(medicalHistory)}">
+      <td colspan="3">No Medical History Found</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
