@@ -22,6 +22,8 @@ public class PatientServiceImpl implements PatientSevice {
     @Autowired
     public PatientRepo patientRepo;
 
+    public String massage;
+
     @Autowired
     public PatientVitalRepo patientVitalRepo;
 
@@ -36,26 +38,38 @@ public class PatientServiceImpl implements PatientSevice {
     @Override
     public PatientVitalsDTO ViewPatientVital(int patientId) {
 
-        PatientEntity patientEntity = patientRepo.findBypatientId(patientId);
 
-        PatientVitalEntity patientVitalEntity = patientVitalRepo.findByPatientId(patientEntity);
-        return modelMapper.map(patientVitalEntity, PatientVitalsDTO.class);
+        PatientEntity patientEntity = patientRepo.findBypatientId(patientId);
+        if (patientEntity!=null) {
+            PatientVitalEntity patientVitalEntity = patientVitalRepo.findByPatientId(patientEntity);
+            return modelMapper.map(patientVitalEntity, PatientVitalsDTO.class);
+        }
+        else
+        {
+            return null;
+        }
 
 
     }
 
     @Override
     public String UpdatePatientVital(int patientId, PatientVitalsDTO patientVitalsDTO) {
-        PatientEntity patientEntity = patientRepo.findBypatientId(patientId);
 
-        PatientVitalEntity patientVitalEntity = patientVitalRepo.findByPatientId(patientEntity);
-        patientVitalEntity.setBloodPressure(patientVitalsDTO.getBloodPressure());
-        patientVitalEntity.setHeight(patientVitalsDTO.getHeight());
-        patientVitalEntity.setWeight(patientVitalsDTO.getWeight());
-        patientVitalEntity.setHeartRate(patientVitalsDTO.getHeartRate());
-        patientVitalEntity.setSugarLevel(patientVitalsDTO.getSugarLevel());
-        patientVitalRepo.save(patientVitalEntity);
-        return "Patient Vitals information has been updated";
+        PatientEntity patientEntity = patientRepo.findBypatientId(patientId);
+        if (patientEntity!=null) {
+            PatientVitalEntity patientVitalEntity = patientVitalRepo.findByPatientId(patientEntity);
+            patientVitalEntity.setBloodPressure(patientVitalsDTO.getBloodPressure());
+            patientVitalEntity.setHeight(patientVitalsDTO.getHeight());
+            patientVitalEntity.setWeight(patientVitalsDTO.getWeight());
+            patientVitalEntity.setHeartRate(patientVitalsDTO.getHeartRate());
+            patientVitalEntity.setSugarLevel(patientVitalsDTO.getSugarLevel());
+            patientVitalRepo.save(patientVitalEntity);
+            massage= "Patient Vitals information has been updated";
+        }
+        else
+            massage="Patient is not found";
+        return massage;
+
 
     }
 }

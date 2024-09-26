@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Book Appointment</title>
+  <style>
+    /* Basic styling - customize as needed */
+    body {
+        font-family: sans-serif;
+    }
+    .container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 300px;
+        margin: 0 auto;
+    }
+    input[type="text"], select {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border: none;
+        cursor: pointer;
+        width: 48%;
+    }
+    .error {
+        color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Book Appointment</h2>
+  <form th:action="@{/SaveBookedAppointment}" method="post">
+    <label for="patientId">Patient Id:</label>
+    <input type="text" id="patientId" name="patientId" required/><br><br>
+
+    <label for="doctorSpecification">Doctor Specification:</label>
+    <select id="doctorSpecification" name="doctorSpecification" required onchange="getDoctorNames(this.value)">
+      <option value="">Select</option>
+      <option value="Cardiologist">Cardiologist</option>
+      <option value="Dermatologist">Dermatologist</option>
+    </select><br><br>
+
+    <label for="doctorName">Doctor Name:</label>
+    <select id="doctorName" name="doctorName" required>
+      <option value="">Select</option>
+    </select><br><br>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required min="[[${today}]]"/><br><br>
+
+    <button type="submit">Book</button>
+    <button type="button" onclick="history.back()">Back</button>
+  </form>
+</div>
+
+<script>
+  function getDoctorNames(specification) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var response = JSON.parse(this.responseText);
+              var doctorNameSelect = document.getElementById("doctorName");
+              doctorNameSelect.innerHTML = "";
+              response.forEach(function(doctor) {
+                  var option = document.createElement("option");
+                  option.value = doctor.doctorId;
+                  option.text = doctor.doctorName;
+                  doctorNameSelect.add(option);
+              });
+          }
+      };
+      xhttp.open("GET", `/doctors/getdoctorName${specification}`, true);
+      xhttp.send();
+  }
+</script>
+</body>
+</html>

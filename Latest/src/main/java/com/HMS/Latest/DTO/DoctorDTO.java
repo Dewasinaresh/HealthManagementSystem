@@ -18,9 +18,9 @@ import java.util.List;
 public class DoctorDTO {
 
 
-    public String doctorName;
-    public String typeOfDoctor;
-    public String doctorSpecification;
+    private String doctorName;
+    private String typeOfDoctor;
+    private String doctorSpecification;
 
 /*
     // Patient & Doctor

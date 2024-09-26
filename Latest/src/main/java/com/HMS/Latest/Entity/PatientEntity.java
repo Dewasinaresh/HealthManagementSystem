@@ -18,7 +18,7 @@ public class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientId;
 
-    private String PatientName;
+    private String patientName;
 
     private int age;
 

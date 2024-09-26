@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @Builder
 public class CreateAppointmentDTO {
 
-    public int patientId;
+    private int patientId;
 
-    public  String doctorSpecification;
+    private  String doctorSpecification;
 
-    public String doctorName;
+    private String doctorName;
 
-    public LocalDate appointmentDate;
+    private LocalDate appointmentDate;
 
 
 

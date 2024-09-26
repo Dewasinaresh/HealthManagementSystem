@@ -90,8 +90,10 @@
 <!-- Patient Vitals Form -->
 <div class="vital-form">
   <form th:action="@{/doctor/updateVital}" method="post">
+
+
     <label for="patientId">Patient Id:</label>
-    <input type="text" id="patientName" name="patientId" th:value="${patientId}" placeholder="Enter Patient Id" required />
+    <input type="text" id="patientIdField" name="patientId" th:value="${patientId}" placeholder="Enter Patient Id" readonly required />
 
     <label for="bloodPressure">Blood Pressure:</label>
     <input type="text" id="bloodPressure" name="bloodPressure" th:value="${bloodPressure}" placeholder="Enter Blood Pressure" required />

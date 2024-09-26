@@ -12,11 +12,11 @@ import java.time.LocalDate;
 public class AppointmentDTO {
 
 
-    public LocalDate appointmentDate;
+    private LocalDate appointmentDate;
 
-    public AppointmentStatus status;
+    private AppointmentStatus status;
 
-    public PatientDTO patientDTO;
+    private PatientDTO patientDTO;
 
 
 }

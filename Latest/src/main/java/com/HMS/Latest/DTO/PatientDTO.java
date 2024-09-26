@@ -10,11 +10,11 @@ import lombok.*;
 @Builder
 public class PatientDTO {
 
-    public String PatientName;
+    private String patientName;
 
-    public int age;
+    private int age;
 
-    public int gender;
+    private String gender;
 
 
 }

@@ -71,7 +71,7 @@ public class LoadProcessor implements LoadProcess {
 
             for (CSVRecord record : records) {
                 PatientEntity patientEntity = PatientEntity.builder()
-                        .PatientName(record.get("patientName"))
+                        .patientName(record.get("patientName"))
                         .gender(record.get("patientGender"))
                         .age(Integer.valueOf(record.get("patientAge")))
                         .build();

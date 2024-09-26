@@ -11,12 +11,12 @@ import lombok.*;
 @Builder
 public class PatientVitalsDTO {
 
-    public String boolPressure;
-    public int bloodPressure;
-    public int sugarLevel;
-    public int heartRate;
-    public int height;
-    public   int weight;
+    private String boolPressure;
+    private int bloodPressure;
+    private int sugarLevel;
+    private int heartRate;
+    private int height;
+    private   int weight;
     @JsonIgnore
-    public PatientEntity patientEntity;
+    private PatientEntity patientEntity;
 }

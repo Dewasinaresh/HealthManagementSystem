@@ -2,9 +2,12 @@ package com.HMS.Latest.Controller;
 
 
 import com.HMS.Latest.DTO.AppointmentDTO;
+import com.HMS.Latest.DTO.DoctorComboDTO;
 import com.HMS.Latest.DTO.DoctorDTO;
+import com.HMS.Latest.DTO.PatientVitalsDTO;
 import com.HMS.Latest.Sevice.AppointmentService;
 import com.HMS.Latest.Sevice.DoctorSevice;
+import com.HMS.Latest.Sevice.PatientSevice;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +26,9 @@ public class DoctorController {
     DoctorSevice doctorSevice;
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    PatientSevice patientSevice;
 
     @GetMapping("/DashBoard")
     public ModelAndView getmodel(){
@@ -86,8 +92,56 @@ public class DoctorController {
         return model;
     }
 
+    @GetMapping("/searchPatientVital")
+    public ModelAndView patientVital(
+            @RequestParam(name = "patientId") int patientId
+    ){
+        PatientVitalsDTO patientVitalsDTO = patientSevice.ViewPatientVital(patientId);
 
+        ModelAndView model;
+        if (patientVitalsDTO!=null) {
 
+            model = new ModelAndView("PatientVitalsDetails");
+            model.addObject("patientId", patientVitalsDTO.getPatientEntity().getPatientId());
+            model.addObject("bloodPressure", patientVitalsDTO.getBloodPressure());
+            model.addObject("sugarLevel", patientVitalsDTO.getSugarLevel());
+            model.addObject("heartRate", patientVitalsDTO.getHeartRate());
+            model.addObject("height", patientVitalsDTO.getHeight());
+            return model;
+        }
+        else {
+
+             model = new ModelAndView("Massage");
+             model.addObject("massage","Patient is not found");
+            return model;
+        }
+    }
+
+    @PostMapping("/updatePatientVital")
+    public ModelAndView PatientVitalsBoard(
+            @RequestParam(name = "patientId") int patientId,
+            @ModelAttribute PatientVitalsDTO patientVitalsDTO
+    ){
+        String massage;
+        if(patientId>0) {
+             massage = patientSevice.UpdatePatientVital(patientId, patientVitalsDTO);
+        }
+        else
+             massage = "Enter correct Id";
+
+        ModelAndView model = new ModelAndView("Massage");
+        model.addObject("massage",massage);
+        return model;
+    }
+
+    @GetMapping("/getdoctorName{specification}")
+    public List<DoctorComboDTO> getDoctorCombo(
+            @PathVariable(name = "specification") String doctorSpecification
+    )
+    {
+        List<DoctorComboDTO> doctorComboDTOS = doctorSevice.loadDoctorCombo(doctorSpecification);
+        return doctorComboDTOS;
+    }
 
 
 }
